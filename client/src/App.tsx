@@ -1,6 +1,5 @@
 import "./App.css";
 import HeroSection from "./components/HeroSection";
-// import Card from "./components/Card";
 import CardsList from "./components/CardsList";
 
 function App() {

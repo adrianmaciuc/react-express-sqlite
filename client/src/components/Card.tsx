@@ -1,13 +1,6 @@
-interface Cards {
-  id: number;
-  developer: string;
-  QA: string;
-  manager: string;
-  task: string;
-  teamName: string;
-}
+import { CardInterface } from "./Card.interface";
 
-export default function Card(cards: Cards) {
+export default function Card(cards: CardInterface) {
   return (
     <>
       <li className="cs-item">

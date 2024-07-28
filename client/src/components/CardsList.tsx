@@ -1,14 +1,8 @@
 import Card from "./Card";
+import { CardInterface } from "./Card.interface";
 
 interface CardsListProps {
-  cards: {
-    id: number;
-    developer: string;
-    QA: string;
-    manager: string;
-    task: string;
-    teamName: string;
-  }[];
+  cards: CardInterface[];
 }
 
 function CardsList({ cards }: CardsListProps) {
