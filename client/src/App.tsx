@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import HeroSection from "./components/HeroSection";
+// import Card from "./components/Card";
+import CardsList from "./components/CardsList";
 
 function App() {
-  const [count, setCount] = useState(0)
+  function getCards() {
+    return [
+      {
+        id: 2,
+        developer: "Zack Galaga",
+        QA: "Adi Meronunia Lacruz",
+        manager: "Murino Outer",
+        task: "11",
+        teamName: "Mambo",
+      },
+      {
+        id: 3,
+        developer: "Zack Galaga",
+        QA: "Adi Meronunia Lacruz",
+        manager: "Murino Outer",
+        task: "11",
+        teamName: "Mambo",
+      },
+      {
+        id: 10,
+        developer: "Zack Galaga",
+        QA: "Adi Meronunia Lacruz",
+        manager: "Murino Outer",
+        task: "11",
+        teamName: "Mambo",
+      },
+      {
+        id: 22,
+        developer: "Zack Galaga",
+        QA: "Adi Meronunia Lacruz",
+        manager: "Murino Outer",
+        task: "11",
+        teamName: "Mambo",
+      },
+    ];
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <section id="card-section">
+        <div className="cs-container">
+          <HeroSection />
+          <ul className="cs-card-group list-group">
+            <CardsList cards={getCards()} />
+          </ul>
+        </div>
+      </section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
