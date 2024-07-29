@@ -11,7 +11,15 @@ const api = require("./api");
 // middleware
 app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://*.martioli.com",
+      "http://localhost:9000",
+      "http://react-express-sqlite-production*.up.railway.app",
+    ],
+  })
+);
 app.set("view engine", "hbs");
 
 // import api routes. runs the file ./api and sets routes defined
