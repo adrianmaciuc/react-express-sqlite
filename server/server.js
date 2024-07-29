@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ["https://z.martioli.com:443", "http://localhost:5173"],
+    origin: ["https://z.martioli.com/", "http://localhost:5173"],
     // "http://react-express-sqlite-production*.up.railway.app",
   })
 );
