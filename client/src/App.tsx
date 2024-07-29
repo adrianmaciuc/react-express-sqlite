@@ -6,14 +6,15 @@ import axios from "axios";
 // import { dataStubbed } from "./stubbedData/api";
 
 function App() {
-  // const stubbedData = dataStubbed;
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:9000/api");
+        if (response.data.length === 0) {
+          Error("No data fetched from api");
+        }
         setData(response.data);
       } catch (error) {
         console.error(error);

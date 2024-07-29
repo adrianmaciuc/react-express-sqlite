@@ -1,0 +1,13 @@
+{
+  "name": "main",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start-client-dev": "cd client && npm run dev",
+    "start-client": "cd client && npm run build",
+    "start-server": "cd server && node populateDBscript.js && node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "Main"
+}

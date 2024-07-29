@@ -29,6 +29,7 @@ const nameList = [
  */
 const populatePeople = (db, nrOfPeople) => {
   db.run("BEGIN TRANSACTION");
+
   for (let i = 0; i < nrOfPeople; i++) {
     // data generated random
     let developer = faker.person.fullName();
@@ -42,6 +43,7 @@ const populatePeople = (db, nrOfPeople) => {
       [developer, QA, manager, task, teamname]
     );
   }
+
   db.run("COMMIT");
 };
 

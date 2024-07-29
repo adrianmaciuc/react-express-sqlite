@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 // api testing routes
 const api = require("./api");
@@ -10,6 +11,7 @@ const api = require("./api");
 // middleware
 app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 app.set("view engine", "hbs");
 
 // import api routes. runs the file ./api and sets routes defined

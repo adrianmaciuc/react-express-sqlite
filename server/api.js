@@ -5,7 +5,6 @@ const router = express.Router();
 const Joi = require("joi");
 const { join } = require("path");
 const sqlite3 = require("sqlite3").verbose();
-const cors = require("cors");
 
 // database setup
 const dbFilePath = join(__dirname, "database.db");
@@ -15,29 +14,6 @@ const db = new sqlite3.Database(dbFilePath);
 
 // Middleware to parse JSON requests
 router.use(express.json({ limit: "1mb" }));
-router.use(cors());
-
-const SECRET_TOKEN = "tiki17";
-
-// Middleware to verify token
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
-
-  if (token === null) {
-    return res.sendStatus(401); // Unauthorized
-  }
-
-  if (token !== SECRET_TOKEN) {
-    return res.sendStatus(403); // Forbidden
-  }
-
-  next();
-}
-
-function generateRandomId() {
-  return Math.floor(Math.random() * 1000); // Generate a random 3-digit number
-}
 
 // Define your API routes
 /**
@@ -328,9 +304,8 @@ router.delete("/api/id/:id", (req, res) => {
  *       content:
  *         application/json:
  *           example:
- *               id: 12
  *               developer: John Smith
- *               qa: Jane Doe
+ *               QA: Jane Doe
  *               manager: Alice Johnson
  *               task: Implement new feature
  *               teamname: Awesome Team
@@ -361,7 +336,7 @@ router.post("/api", (req, res) => {
   if (error) return res.status(400).json({ error: error.message });
 
   db.run(
-    "INSERT INTO data (developer, QA, manager, task, teamname) VALUES (?, ?, ?, ?, ?, ?)",
+    "INSERT INTO data (developer, QA, manager, task, teamname) VALUES (?, ?, ?, ?, ?)",
     [developer, QA, manager, task, teamname],
     function (err) {
       if (err) {
