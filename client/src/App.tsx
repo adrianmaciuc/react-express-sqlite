@@ -1,44 +1,26 @@
 import "./App.css";
 import HeroSection from "./components/HeroSection";
 import CardsList from "./components/CardsList";
+import { useEffect, useState } from "react";
+import axios from "axios";
+// import { dataStubbed } from "./stubbedData/api";
 
 function App() {
-  function getCards() {
-    return [
-      {
-        id: 2,
-        developer: "Zack Galaga",
-        QA: "Adi Meronunia Lacruz",
-        manager: "Murino Outer",
-        task: "11",
-        teamName: "Mambo",
-      },
-      {
-        id: 3,
-        developer: "Zack Galaga",
-        QA: "Adi Meronunia Lacruz",
-        manager: "Murino Outer",
-        task: "11",
-        teamName: "Mambo",
-      },
-      {
-        id: 10,
-        developer: "Zack Galaga",
-        QA: "Adi Meronunia Lacruz",
-        manager: "Murino Outer",
-        task: "11",
-        teamName: "Mambo",
-      },
-      {
-        id: 22,
-        developer: "Zack Galaga",
-        QA: "Adi Meronunia Lacruz",
-        manager: "Murino Outer",
-        task: "11",
-        teamName: "Mambo",
-      },
-    ];
-  }
+  // const stubbedData = dataStubbed;
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:9000/api");
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -46,7 +28,7 @@ function App() {
         <div className="cs-container">
           <HeroSection />
           <ul className="cs-card-group list-group">
-            <CardsList cards={getCards()} />
+            <CardsList cards={data} />
           </ul>
         </div>
       </section>
