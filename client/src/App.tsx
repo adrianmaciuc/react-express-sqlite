@@ -11,7 +11,9 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:9000/api");
+        const response = await axios.get(
+          "https://react-express-sqlite-production.up.railway.app/api"
+        );
         if (response.data.length === 0) {
           Error("No data fetched from api");
         }
