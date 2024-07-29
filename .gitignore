@@ -1,3 +1,4 @@
+
 # Logs
 logs
 *.log
@@ -131,4 +132,5 @@ dist
 
 # database creation
 database*.db
+package-lock.json
 
