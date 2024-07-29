@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: [
-      "https://*.martioli.com",
+      "https://z.martioli.com",
       "http://localhost:9000",
       "http://react-express-sqlite-production*.up.railway.app",
     ],
