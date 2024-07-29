@@ -21,7 +21,7 @@ const nameList = [
 ];
 
 /**
- * Populates developer, QA, manager, automation, task, story_points in the database with randomly generated people data.
+ * Populates developer, QA, manager, task, teamname in the database with randomly generated people data.
  *
  * @param {Object} db - The database instance to perform operations on.
  * @param {number} nrOfPeople - The number of people to generate and insert into the 'data' table.
