@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node populateDBscript.js && node server.js"
+    "start": "node populateDBscript.js && node server.js",
+    "build:backend": "node populateDBscript.js && node server.js"
   },
   "author": "",
   "license": "ISC",
