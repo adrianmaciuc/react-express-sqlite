@@ -11,13 +11,17 @@ const api = require("./api");
 // middleware
 app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(
-//   cors({
-//     origin: ["https://z.martioli.com/", "http://localhost:5173"],
-//     // "http://react-express-sqlite-production*.up.railway.app",
-//   })
-// );
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://z.martioli.com/",
+      "http://localhost:5173",
+      "react-express-sqlite.railway.internal",
+    ],
+    // "http://react-express-sqlite-production*.up.railway.app",
+  })
+);
+// app.use(cors());
 app.set("view engine", "hbs");
 
 // import api routes. runs the file ./api and sets routes defined
