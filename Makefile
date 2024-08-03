@@ -1,4 +1,5 @@
 start-client-dev:
+	export DEV="dev" 
 	cd client && npm run dev
 
 build-client:

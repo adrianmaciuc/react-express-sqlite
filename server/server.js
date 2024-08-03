@@ -18,10 +18,9 @@ app.use(
       "http://localhost:5173",
       "react-express-sqlite.railway.internal",
     ],
-    // "http://react-express-sqlite-production*.up.railway.app",
   })
 );
-// app.use(cors());
+
 app.set("view engine", "hbs");
 
 // import api routes. runs the file ./api and sets routes defined
