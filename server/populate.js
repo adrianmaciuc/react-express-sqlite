@@ -36,7 +36,7 @@ const populatePeople = (db, nrOfPeople) => {
     let QA = faker.person.fullName();
     let manager = getRandomName(nameList);
     let task = faker.company.catchPhrase();
-    let teamname = faker.commerce.productName();
+    let teamname = faker.commerce.productMaterial();
 
     db.run(
       "INSERT INTO data (developer, QA, manager, task, teamname) VALUES (?, ?, ?, ?, ?)",
