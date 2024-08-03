@@ -7,6 +7,6 @@ if (import.meta.env.VITE_ENV === "dev") {
 }
 
 // Health Check on Backend using axios
-await envSetup.isBackEndAlive();
+envSetup.isBackEndAlive();
 
 console.log("Global initialization complete");
