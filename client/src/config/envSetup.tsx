@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export function getEnvironment() {
-  console.log("Environment passed: ", import.meta.env.ENV);
+  console.log("Environment passed: ", import.meta.env.VITE_ENV);
   if (import.meta.env.VITE_ENV === "dev") {
     return "http://localhost:9000";
   } else {
-    return "https://z3.martioli.com";
+    return "react-express-sqlite.railway.internal";
   }
 }
 
