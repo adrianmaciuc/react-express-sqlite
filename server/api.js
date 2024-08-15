@@ -18,6 +18,25 @@ router.use(express.json({ limit: "1mb" }));
 // Define your API routes
 /**
  * @swagger
+ * /check:
+ *   get:
+ *     summary: Get server health check
+ *     description:
+ *     responses:
+ *       200:
+ *
+ */
+router.get("/check", (req, res) => {
+  try {
+    res.status(200).json({ status: "OK" });
+  } catch (error) {
+    console.error("Health check error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+/**
+ * @swagger
  * /api:
  *   get:
  *     summary: Get data from the testing endpoint

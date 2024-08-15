@@ -5,13 +5,13 @@ export function getEnvironment() {
   if (import.meta.env.VITE_ENV === "dev") {
     return "http://localhost:9000";
   } else {
-    return "react-express-sqlite.railway.internal";
+    return "https://z3.martioli.com/";
   }
 }
 
 export async function isBackEndAlive() {
   try {
-    await axios.get("/api");
+    await axios.get("/check");
     console.log("Backend Health Check PASSED");
     return true;
   } catch (error) {

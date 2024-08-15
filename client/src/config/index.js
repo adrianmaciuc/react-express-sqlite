@@ -1,12 +1,8 @@
-import * as envSetup from "./envSetup";
+import { getEnvironment, isBackEndAlive } from "./envSetup.tsx";
 import axios from "axios";
 
-axios.defaults.baseURL = envSetup.getEnvironment();
-if (import.meta.env.VITE_ENV === "dev") {
-  console.log(`Back End Environment set: ${axios.defaults.baseURL}`);
-}
-
 // Health Check on Backend using axios
-envSetup.isBackEndAlive();
+axios.defaults.baseURL = getEnvironment();
+// await isBackEndAlive();
 
 console.log("Global initialization complete");
