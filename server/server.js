@@ -12,14 +12,14 @@ const api = require("./api");
 app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
-  cors()
-  // cors({
-  //   origin: [
-  //     "https://z.martioli.com/",
-  //     "http://localhost:5173",
-  //     "react-express-sqlite.railway.internal",
-  //   ],
-  // })
+  // cors()
+  cors({
+    origin: [
+      "https://z.martioli.com",
+      "http://localhost:5173",
+      "react-express-sqlite.railway.internal",
+    ],
+  })
 );
 
 app.set("view engine", "hbs");
