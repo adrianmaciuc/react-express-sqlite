@@ -1,21 +1,24 @@
 import axios from "axios";
 
 export function getEnvironment() {
-  console.log("Environment passed: ", import.meta.env.VITE_ENV);
-  if (import.meta.env.VITE_ENV === "dev") {
-    return "http://localhost:9000";
-  } else {
-    return "https://z3.martioli.com/";
+  const environment = import.meta.env.VITE_ENV;
+
+  switch (environment) {
+    case "dev":
+      return "http://localhost:9000";
+    default:
+      return "https://z3.martioli.com/";
   }
 }
 
-export async function isBackEndAlive() {
+export async function isBackendAlive(): Promise<boolean> {
   try {
     await axios.get("/check");
-    console.log("Backend Health Check PASSED");
     return true;
   } catch (error) {
-    console.warn("Backend Health Check fail", error);
+    console.error("Backend health check failed", error);
     return false;
   }
 }
+
+export default getEnvironment;
