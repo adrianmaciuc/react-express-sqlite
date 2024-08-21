@@ -4,5 +4,5 @@ export interface CardInterface {
   QA: string;
   manager: string;
   task: string;
-  teamName: string;
+  teamname: string;
 }

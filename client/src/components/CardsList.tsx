@@ -16,7 +16,7 @@ function CardsList({ cards }: CardsListProps) {
           QA={card.QA}
           manager={card.manager}
           task={card.task}
-          teamName={card.teamName}
+          teamname={card.teamname}
         />
       ))}
     </>
