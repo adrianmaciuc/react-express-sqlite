@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 interface AddEntryFormProps {
@@ -10,6 +10,8 @@ interface AddEntryFormProps {
 }
 
 function AddEntryForm() {
+  const [entryAdded, setEntryAdded] = useState(false);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data: AddEntryFormProps = {
@@ -22,6 +24,7 @@ function AddEntryForm() {
     try {
       const response = await axios.post("/api", data);
       console.log(response.data);
+      setEntryAdded(true);
     } catch (error) {
       console.error(error);
     }
@@ -88,6 +91,9 @@ function AddEntryForm() {
         <button className="cs-button-solid cs-submit" type="submit">
           Add new entry
         </button>
+        {entryAdded && (
+          <p className="entry-added-message">Entry added successfully!</p>
+        )}
       </form>
     </>
   );
