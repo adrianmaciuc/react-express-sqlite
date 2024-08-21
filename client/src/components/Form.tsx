@@ -1,4 +1,32 @@
+import React from "react";
+import axios from "axios";
+
+interface AddEntryFormProps {
+  developer: string;
+  QA: string;
+  manager: string;
+  task: string;
+  teamname: string;
+}
+
 function AddEntryForm() {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data: AddEntryFormProps = {
+      developer: event.currentTarget.developerInput.value,
+      QA: event.currentTarget.QAinput.value,
+      manager: event.currentTarget.managerInput.value,
+      task: event.currentTarget.messageInput.value,
+      teamname: event.currentTarget.teamnameInput.value,
+    };
+    try {
+      const response = await axios.post("/api", data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <form
@@ -6,13 +34,14 @@ function AddEntryForm() {
         id="cs-form-587-984"
         name="Contact Form"
         method="post"
+        onSubmit={handleSubmit}
       >
         <label className="cs-label">
           <input
             className="cs-input"
             required
             type="text"
-            id="name-587-984"
+            id="developerInput"
             name="Developer"
             placeholder="Developer"
           />
@@ -22,7 +51,7 @@ function AddEntryForm() {
             className="cs-input"
             required
             type="text"
-            id="phone-587-984"
+            id="QAinput"
             name="QA"
             placeholder="QA"
           />
@@ -32,7 +61,7 @@ function AddEntryForm() {
             className="cs-input"
             required
             type="text"
-            id="email-587-984"
+            id="managerInput"
             name="Manager"
             placeholder="Manager"
           />
@@ -42,7 +71,7 @@ function AddEntryForm() {
             className="cs-input"
             required
             type="text"
-            id="email-587-984"
+            id="teamnameInput"
             name="TeamName"
             placeholder="Team Name"
           />
@@ -52,7 +81,7 @@ function AddEntryForm() {
             className="cs-input cs-textarea"
             required
             name="Message"
-            id="message-587-984"
+            id="messageInput"
             placeholder="Write task details..."
           ></textarea>
         </label>
