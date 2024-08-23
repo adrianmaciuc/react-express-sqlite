@@ -3,7 +3,7 @@ export interface CardsListProps {
 }
 
 export interface CardInterface {
-  id: number;
+  id?: number;
   developer: string;
   QA: string;
   manager: string;

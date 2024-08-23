@@ -1,20 +1,38 @@
 import { CardInterface } from "./types";
+import { Link } from "react-router-dom";
 
 export default function Card(cards: CardInterface) {
   return (
     <>
       <li className="cs-item">
-        <span className="cs-number">{cards.id}</span>
-        <h3 className="cs-h3">{cards.teamname}</h3>
+        <span data-testid="card-id" className="cs-number">
+          {cards.id}
+        </span>
+        <h3 data-testid="card-teammame" className="cs-h3">
+          {cards.teamname}
+        </h3>
         <div>
-          <p className="cs-item-text">Dev: {cards.developer}</p>
-          <p className="cs-item-text">QA: {cards.QA}</p>
-          <p className="cs-item-text">Manager: {cards.manager}</p>
-          <p className="cs-item-text">Task: {cards.task}</p>
+          <p data-testid="card-developer" className="cs-item-text">
+            Dev: {cards.developer}
+          </p>
+          <p data-testid="card-qa" className="cs-item-text">
+            QA: {cards.QA}
+          </p>
+          <p data-testid="card-manager" className="cs-item-text">
+            Manager: {cards.manager}
+          </p>
+          <p data-testid="card-task" className="cs-item-text">
+            Task: {cards.task}
+          </p>
         </div>
-        <a href="" className="cs-button-6" aria-label="view task">
-          View Task
-        </a>
+        <Link
+          to={`/team/${cards.id}`}
+          data-testid="view-task-btn"
+          className="cs-button-6"
+          aria-label="view task"
+        >
+          View Team
+        </Link>
       </li>
     </>
   );

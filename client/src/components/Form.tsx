@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import { AddEntryFormProps } from "./types";
+import AddNewEntryBtn from "./buttons";
 
 function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
-  const [isEntryAdded, setIsEntryAdded] = useState(false);
-
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -18,7 +17,6 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
 
     try {
       const response = await axios.post("/api", entry);
-      setIsEntryAdded(true);
       if (onAddEntry) {
         onAddEntry(response.data);
       }
@@ -35,6 +33,7 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
         name="Contact Form"
         method="post"
         onSubmit={handleFormSubmit}
+        data-testid="form"
       >
         <label className="cs-label">
           <input
@@ -44,6 +43,7 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             name="Developer"
             id="developerInput"
             placeholder="Developer"
+            data-testid="developer-input"
           />
         </label>
         <label className="cs-label">
@@ -54,6 +54,7 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             name="QA"
             id="QAinput"
             placeholder="QA"
+            data-testid="qa-input"
           />
         </label>
         <label className="cs-label">
@@ -64,6 +65,7 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             name="Manager"
             id="managerInput"
             placeholder="Manager"
+            data-testid="manager-input"
           />
         </label>
         <label className="cs-label">
@@ -74,6 +76,7 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             name="TeamName"
             id="teamnameInput"
             placeholder="Team Name"
+            data-testid="teamname-input"
           />
         </label>
         <label className="cs-label cs-message">
@@ -83,14 +86,10 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             name="Message"
             id="messageInput"
             placeholder="Write task details..."
+            data-testid="message-input"
           />
         </label>
-        <button className="cs-button-solid cs-submit" type="submit">
-          Add new entry
-        </button>
-        {isEntryAdded && (
-          <p className="entry-added-message">Entry added successfully!</p>
-        )}
+        <AddNewEntryBtn message="Entry added successfully!" />
       </form>
     </>
   );
