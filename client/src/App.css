@@ -233,7 +233,7 @@ body {
   text-decoration: none;
   font-weight: 700;
   min-width: 10.875rem;
-  margin: auto;
+  margin: 1rem auto;
   color: #1a1a1a;
   padding: 0 1.5rem;
   /* prevents padding and border from affecting height and width */
