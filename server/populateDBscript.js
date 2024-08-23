@@ -3,4 +3,4 @@ const { runDB } = require("./databaseConfig");
 
 const db = runDB();
 
-populatePeople(db, 50);
+populatePeople(db, 7);
