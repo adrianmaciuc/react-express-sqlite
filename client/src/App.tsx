@@ -2,23 +2,24 @@ import "./App.css";
 import HeroSection from "./components/HeroSection";
 import CardsList from "./components/CardsList";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import AddEntryForm from "./components/Form";
+import { fetchDataFromAPI } from "./api/apidata";
+import { CardInterface } from "./components/types";
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<CardInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleAddEntry = (newEntry: CardInterface) => {
+    setData([...data, newEntry]);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const response = await axios.get("/api");
-        setData(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
+      setIsLoading(true);
+      const apiData = await fetchDataFromAPI();
+      setData(apiData);
+      setIsLoading(false);
     };
     fetchData();
   }, []);
@@ -29,7 +30,7 @@ function App() {
         <div className="cs-container">
           <HeroSection />
           <section id="contact-984">
-            <AddEntryForm />
+            <AddEntryForm onAddEntry={handleAddEntry} />
           </section>
           {isLoading ? (
             <div>Loading...</div>

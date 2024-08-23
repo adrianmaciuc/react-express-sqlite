@@ -1,30 +1,27 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { AddEntryFormProps } from "./types";
 
-interface AddEntryFormProps {
-  developer: string;
-  QA: string;
-  manager: string;
-  task: string;
-  teamname: string;
-}
+function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
+  const [isEntryAdded, setIsEntryAdded] = useState(false);
 
-function AddEntryForm() {
-  const [entryAdded, setEntryAdded] = useState(false);
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data: AddEntryFormProps = {
-      developer: event.currentTarget.developerInput.value,
-      QA: event.currentTarget.QAinput.value,
-      manager: event.currentTarget.managerInput.value,
-      task: event.currentTarget.messageInput.value,
-      teamname: event.currentTarget.teamnameInput.value,
+    const formData = new FormData(event.currentTarget);
+    const entry = {
+      developer: formData.get("Developer") as string,
+      QA: formData.get("QA") as string,
+      manager: formData.get("Manager") as string,
+      task: formData.get("Message") as string,
+      teamname: formData.get("TeamName") as string,
     };
+
     try {
-      const response = await axios.post("/api", data);
-      console.log(response.data);
-      setEntryAdded(true);
+      const response = await axios.post("/api", entry);
+      setIsEntryAdded(true);
+      if (onAddEntry) {
+        onAddEntry(response.data);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -37,15 +34,15 @@ function AddEntryForm() {
         id="cs-form-587-984"
         name="Contact Form"
         method="post"
-        onSubmit={handleSubmit}
+        onSubmit={handleFormSubmit}
       >
         <label className="cs-label">
           <input
             className="cs-input"
             required
             type="text"
-            id="developerInput"
             name="Developer"
+            id="developerInput"
             placeholder="Developer"
           />
         </label>
@@ -54,8 +51,8 @@ function AddEntryForm() {
             className="cs-input"
             required
             type="text"
-            id="QAinput"
             name="QA"
+            id="QAinput"
             placeholder="QA"
           />
         </label>
@@ -64,8 +61,8 @@ function AddEntryForm() {
             className="cs-input"
             required
             type="text"
-            id="managerInput"
             name="Manager"
+            id="managerInput"
             placeholder="Manager"
           />
         </label>
@@ -74,8 +71,8 @@ function AddEntryForm() {
             className="cs-input"
             required
             type="text"
-            id="teamnameInput"
             name="TeamName"
+            id="teamnameInput"
             placeholder="Team Name"
           />
         </label>
@@ -86,12 +83,12 @@ function AddEntryForm() {
             name="Message"
             id="messageInput"
             placeholder="Write task details..."
-          ></textarea>
+          />
         </label>
         <button className="cs-button-solid cs-submit" type="submit">
           Add new entry
         </button>
-        {entryAdded && (
+        {isEntryAdded && (
           <p className="entry-added-message">Entry added successfully!</p>
         )}
       </form>

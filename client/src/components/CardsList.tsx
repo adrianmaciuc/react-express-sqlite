@@ -1,9 +1,5 @@
 import Card from "./Card";
-import { CardInterface } from "./Card.interface";
-
-interface CardsListProps {
-  cards: CardInterface[];
-}
+import { CardsListProps } from "./types";
 
 function CardsList({ cards }: CardsListProps) {
   return (
