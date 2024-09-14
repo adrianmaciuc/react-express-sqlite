@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { MdOutlineArrowBackIos } from "react-icons/md";
 
 interface AddNewEntryBtnProps {
   message: string;
@@ -45,6 +46,27 @@ const AddNewEntryBtn: React.FC<AddNewEntryBtnProps> = ({ message }) => {
         </div>
       )}
     </div>
+  );
+};
+
+export const BackButton: React.FC = () => {
+  const handleBackBtnClick = () => {
+    window.history.back();
+  };
+
+  return (
+    <>
+      <MdOutlineArrowBackIos />
+      <button
+        className="cs-button-6"
+        onClick={handleBackBtnClick}
+        type="button"
+        aria-label="Go back"
+        data-testid="back-button"
+      >
+        <span>Back</span>
+      </button>
+    </>
   );
 };
 

@@ -8,7 +8,7 @@ export default function Card(cards: CardInterface) {
         <span data-testid="card-id" className="cs-number">
           {cards.id}
         </span>
-        <h3 data-testid="card-teammame" className="cs-h3">
+        <h3 data-testid="card-teamname" className="cs-h3">
           {cards.teamname}
         </h3>
         <div>

@@ -41,7 +41,7 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             required
             type="text"
             name="Developer"
-            id="developerInput"
+            id="developer-input"
             placeholder="Developer"
             data-testid="developer-input"
           />
@@ -52,7 +52,7 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             required
             type="text"
             name="QA"
-            id="QAinput"
+            id="QA-input"
             placeholder="QA"
             data-testid="qa-input"
           />
@@ -63,7 +63,7 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             required
             type="text"
             name="Manager"
-            id="managerInput"
+            id="manager-input"
             placeholder="Manager"
             data-testid="manager-input"
           />
@@ -74,7 +74,7 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             required
             type="text"
             name="TeamName"
-            id="teamnameInput"
+            id="teamname-input"
             placeholder="Team Name"
             data-testid="teamname-input"
           />
@@ -84,7 +84,7 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             className="cs-input cs-textarea"
             required
             name="Message"
-            id="messageInput"
+            id="message-input"
             placeholder="Write task details..."
             data-testid="message-input"
           />
