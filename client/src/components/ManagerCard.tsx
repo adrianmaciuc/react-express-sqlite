@@ -25,7 +25,7 @@ export const ManagerCard = ({ manager }: ManagerCardProps) => {
           height={400}
         />
       </picture>
-      <div className="cs-info">
+      <div className="cs-info" data-testid="manager-info">
         <span className="cs-name">{manager}</span>
         <span className="cs-job">Manager</span>
         <div className="cs-social-group">

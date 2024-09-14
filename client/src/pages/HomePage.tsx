@@ -28,6 +28,9 @@ const HomePage: React.FC = () => {
       <section id="card-section">
         <div className="cs-container">
           <HeroSection />
+          <section id="add-form">
+            <AddEntryForm onAddEntry={handleAddEntry} />
+          </section>
           {isLoading ? (
             <div>Loading...</div>
           ) : (
@@ -35,9 +38,6 @@ const HomePage: React.FC = () => {
               <CardsList cards={cardsData} />
             </ul>
           )}
-          <section id="contact-984">
-            <AddEntryForm onAddEntry={handleAddEntry} />
-          </section>
         </div>
       </section>
     </div>

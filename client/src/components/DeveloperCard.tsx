@@ -25,7 +25,7 @@ export const DeveloperCard = ({ developer }: DeveloperCardProps) => {
           height={400}
         />
       </picture>
-      <div className="cs-info">
+      <div className="cs-info" data-testid="developer-info">
         <span className="cs-name">{developer}</span>
         <span className="cs-job">Developer</span>
         <div className="cs-social-group">

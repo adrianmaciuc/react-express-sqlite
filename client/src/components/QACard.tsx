@@ -25,7 +25,7 @@ export const QACard = ({ QA }: QACardProps) => {
           height={400}
         />
       </picture>
-      <div className="cs-info">
+      <div className="cs-info" data-testid="QA-info">
         <span className="cs-name">{QA}</span>
         <span className="cs-job">QA Engineer</span>
         <div className="cs-social-group">

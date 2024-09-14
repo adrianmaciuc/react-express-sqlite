@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { AddEntryFormProps } from "./types";
 import AddNewEntryBtn from "./buttons";
 
 function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
+  const [developer, setDeveloper] = useState("");
+  const [QA, setQA] = useState("");
+  const [manager, setManager] = useState("");
+  const [task, setTask] = useState("");
+  const [teamname, setTeamname] = useState("");
+
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -20,6 +26,11 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
       if (onAddEntry) {
         onAddEntry(response.data);
       }
+      setDeveloper("");
+      setQA("");
+      setManager("");
+      setTask("");
+      setTeamname("");
     } catch (error) {
       console.error(error);
     }
@@ -30,10 +41,10 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
       <form
         className="cs-form"
         id="cs-form-587-984"
-        name="Contact Form"
+        name="add-new-entry-form"
         method="post"
         onSubmit={handleFormSubmit}
-        data-testid="form"
+        data-testid="add-form"
       >
         <label className="cs-label">
           <input
@@ -44,6 +55,8 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             id="developer-input"
             placeholder="Developer"
             data-testid="developer-input"
+            value={developer}
+            onChange={(e) => setDeveloper(e.target.value)}
           />
         </label>
         <label className="cs-label">
@@ -55,6 +68,8 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             id="QA-input"
             placeholder="QA"
             data-testid="qa-input"
+            value={QA}
+            onChange={(e) => setQA(e.target.value)}
           />
         </label>
         <label className="cs-label">
@@ -66,6 +81,8 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             id="manager-input"
             placeholder="Manager"
             data-testid="manager-input"
+            value={manager}
+            onChange={(e) => setManager(e.target.value)}
           />
         </label>
         <label className="cs-label">
@@ -77,6 +94,8 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             id="teamname-input"
             placeholder="Team Name"
             data-testid="teamname-input"
+            value={teamname}
+            onChange={(e) => setTeamname(e.target.value)}
           />
         </label>
         <label className="cs-label cs-message">
@@ -87,6 +106,8 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             id="message-input"
             placeholder="Write task details..."
             data-testid="message-input"
+            value={task}
+            onChange={(e) => setTask(e.target.value)}
           />
         </label>
         <AddNewEntryBtn message="Entry added successfully!" />
