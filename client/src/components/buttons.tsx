@@ -3,17 +3,24 @@ import { MdOutlineArrowBackIos } from "react-icons/md";
 
 interface AddNewEntryBtnProps {
   message: string;
+  tokenValidation: boolean;
+  setTokenValidation: (value: boolean) => void;
 }
 
-const AddNewEntryBtn: React.FC<AddNewEntryBtnProps> = ({ message }) => {
+const AddNewEntryBtn: React.FC<AddNewEntryBtnProps> = ({
+  message,
+  tokenValidation,
+  setTokenValidation,
+}) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShow(false);
+      setTokenValidation(false);
     }, 3000);
     return () => clearTimeout(timeoutId);
-  }, [show]);
+  }, [setTokenValidation, show]);
 
   const handleClick = () => {
     setShow(true);
@@ -29,7 +36,7 @@ const AddNewEntryBtn: React.FC<AddNewEntryBtnProps> = ({ message }) => {
       >
         Add new entry
       </button>
-      {show && (
+      {show && tokenValidation && (
         <div
           className="alert alert-info alert-dismissible"
           role="alert"

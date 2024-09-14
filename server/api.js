@@ -4,6 +4,7 @@ const swaggerUi = require("swagger-ui-express");
 const router = express.Router();
 const Joi = require("joi");
 const { join } = require("path");
+const { isAuth } = require("./auth");
 const sqlite3 = require("sqlite3").verbose();
 
 // database setup
@@ -16,16 +17,6 @@ const db = new sqlite3.Database(dbFilePath);
 router.use(express.json({ limit: "1mb" }));
 
 // Define your API routes
-/**
- * @swagger
- * /check:
- *   get:
- *     summary: Get server health check
- *     description:
- *     responses:
- *       200:
- *
- */
 router.get("/check", (req, res) => {
   try {
     res.status(200).json({ status: "OK" });
@@ -146,6 +137,12 @@ router.get("/api/id/:id", (req, res) => {
  *         required: true
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: token
+ *         description: Valid token to be able to perform write actions
+ *         required: true
+ *         schema:
+ *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -153,7 +150,7 @@ router.get("/api/id/:id", (req, res) => {
  *           example:
  *               id: 123456
  *               developer: "Updated John Smith"
- *               qa: "Updated Jane Doe"
+ *               QA: "Updated Jane Doe"
  *               manager: "Updated Alice Johnson"
  *               task: "Updated Implement new feature"
  *               teamname: "Updated Awesome Team"
@@ -167,6 +164,14 @@ router.get("/api/id/:id", (req, res) => {
  */
 router.put("/api/id/:id", (req, res) => {
   const { id } = req.params;
+  const { token } = req.query;
+
+  if (!token || !isAuth(token)) {
+    return res.status(401).json({
+      message:
+        "Unauthorized token. Ask for a valid token to perform any write actions on database ",
+    });
+  }
 
   const isValidId = (id) => /^\d+$/.test(id) && parseInt(id) > 0;
   if (!isValidId(id)) {
@@ -215,6 +220,12 @@ router.put("/api/id/:id", (req, res) => {
  *         required: true
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: token
+ *         description: Valid token to be able to perform write actions
+ *         required: true
+ *         schema:
+ *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -231,8 +242,16 @@ router.put("/api/id/:id", (req, res) => {
  *               message: Data updated successfully
  */
 router.patch("/api/id/:id", (req, res) => {
-  const { id } = req.params;
   const updateFields = req.body;
+  const { id } = req.params;
+  const { token } = req.query;
+
+  if (!token || !isAuth(token)) {
+    return res.status(401).json({
+      message:
+        "Unauthorized token. Ask for a valid token to perform any write actions on database ",
+    });
+  }
 
   const isValidId = (id) => /^\d+$/.test(id) && parseInt(id) > 0;
   if (!isValidId(id)) {
@@ -284,8 +303,14 @@ router.patch("/api/id/:id", (req, res) => {
  *         required: true
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: token
+ *         description: Valid token to be able to perform write actions
+ *         required: true
+ *         schema:
+ *           type: string
  *     responses:
- *       200:
+ *       204:
  *         description: Data deleted successfully
  *         content:
  *           application/json:
@@ -294,6 +319,14 @@ router.patch("/api/id/:id", (req, res) => {
  */
 router.delete("/api/id/:id", (req, res) => {
   const { id } = req.params;
+  const { token } = req.query;
+
+  if (!token || !isAuth(token)) {
+    return res.status(401).json({
+      message:
+        "Unauthorized token. Ask for a valid token to perform any write actions on database",
+    });
+  }
 
   const isValidId = (id) => /^\d+$/.test(id) && parseInt(id) > 0;
   if (!isValidId(id)) {
@@ -318,6 +351,13 @@ router.delete("/api/id/:id", (req, res) => {
  *   post:
  *     summary: Create new data at the testing endpoint
  *     description: Create new data at the testing endpoint
+ *     parameters:
+ *       - in: query
+ *         name: token
+ *         description: Valid token to be able to perform write actions
+ *         required: true
+ *         schema:
+ *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -350,6 +390,14 @@ router.delete("/api/id/:id", (req, res) => {
  */
 router.post("/api", (req, res) => {
   const { developer, QA, manager, task, teamname } = req.body;
+  const { token } = req.query;
+
+  if (!isAuth(token)) {
+    return res.status(401).json({
+      message:
+        "Unauthorized token. Ask for a valid token to perform any write actions on database ",
+    });
+  }
 
   const { error } = schemaValidateRequest(req.body);
   if (error) return res.status(400).json({ error: error.message });
@@ -384,6 +432,7 @@ function schemaValidateRequest(req) {
     manager: Joi.string(),
     task: Joi.string().required(),
     teamname: Joi.string(),
+    token: Joi.string(),
   });
 
   return schema.validate(req);

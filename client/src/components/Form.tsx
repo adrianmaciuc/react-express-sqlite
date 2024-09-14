@@ -9,11 +9,13 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
   const [manager, setManager] = useState("");
   const [task, setTask] = useState("");
   const [teamname, setTeamname] = useState("");
+  const [tokenFieldInput, setTokenFieldInput] = useState("");
+  const [tokenValidation, setTokenValidation] = useState(false);
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const entry = {
+    const requestBody = {
       developer: formData.get("Developer") as string,
       QA: formData.get("QA") as string,
       manager: formData.get("Manager") as string,
@@ -22,7 +24,12 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
     };
 
     try {
-      const response = await axios.post("/api", entry);
+      const response = await axios.post("/api", requestBody, {
+        params: { token: tokenFieldInput },
+      });
+      if (response.status === 201) {
+        setTokenValidation(true);
+      }
       if (onAddEntry) {
         onAddEntry(response.data);
       }
@@ -31,6 +38,7 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
       setManager("");
       setTask("");
       setTeamname("");
+      setTokenFieldInput("");
     } catch (error) {
       console.error(error);
     }
@@ -110,7 +118,23 @@ function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
             onChange={(e) => setTask(e.target.value)}
           />
         </label>
-        <AddNewEntryBtn message="Entry added successfully!" />
+        <label className="cs-label">
+          <input
+            className="cs-input"
+            required
+            name="Token"
+            id="token-input"
+            placeholder="secret key"
+            data-testid="token-input"
+            value={tokenFieldInput}
+            onChange={(e) => setTokenFieldInput(e.target.value)}
+          />
+        </label>
+        <AddNewEntryBtn
+          tokenValidation={tokenValidation}
+          setTokenValidation={setTokenValidation}
+          message="Entry added successfully!"
+        />
       </form>
     </>
   );
