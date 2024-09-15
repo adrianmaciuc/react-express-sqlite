@@ -13,7 +13,11 @@ app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ["https://z.martioli.com", "http://localhost:5173"],
+    origin: [
+      "https://z.martioli.com",
+      "http://localhost:5173",
+      "https://*.martioli.com",
+    ],
   })
 );
 

@@ -392,7 +392,7 @@ router.post("/api", (req, res) => {
   const { developer, QA, manager, task, teamname } = req.body;
   const { token } = req.query;
 
-  if (!isAuth(token)) {
+  if (!token || !isAuth(token)) {
     return res.status(401).json({
       message:
         "Unauthorized token. Ask for a valid token to perform any write actions on database ",
