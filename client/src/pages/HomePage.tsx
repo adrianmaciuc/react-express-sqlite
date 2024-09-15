@@ -9,7 +9,7 @@ const HomePage: React.FC = () => {
   const [cardsData, setCardsData] = useState<CardInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleAddEntry = (newEntry: CardInterface) => {
+  const handleCardsAddEntry = (newEntry: CardInterface) => {
     setCardsData([...cardsData, newEntry]);
   };
 
@@ -29,7 +29,7 @@ const HomePage: React.FC = () => {
         <div className="cs-container">
           <HeroSection />
           <section id="add-form">
-            <AddEntryForm onAddEntry={handleAddEntry} />
+            <AddEntryForm onAddEntry={handleCardsAddEntry} />
           </section>
           {isLoading ? (
             <div>Loading...</div>

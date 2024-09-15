@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { MdOutlineArrowBackIos } from "react-icons/md";
+import { tokenContext } from "./context";
 
 interface AddNewEntryBtnProps {
   message: string;
-  tokenValidation: boolean;
   setTokenValidation: (value: boolean) => void;
 }
 
 const AddNewEntryBtn: React.FC<AddNewEntryBtnProps> = ({
   message,
-  tokenValidation,
   setTokenValidation,
 }) => {
   const [show, setShow] = useState(false);
+  const tokenValidation = useContext(tokenContext);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
