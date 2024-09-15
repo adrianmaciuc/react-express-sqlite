@@ -38,6 +38,7 @@ const AddNewEntryBtn: React.FC<AddNewEntryBtnProps> = ({
       </button>
       {show && tokenValidation && (
         <div
+          data-testid="info-msg-entry-added"
           className="alert alert-info alert-dismissible"
           role="alert"
           style={{ position: "relative", top: "0.5rem" }}
@@ -48,7 +49,6 @@ const AddNewEntryBtn: React.FC<AddNewEntryBtnProps> = ({
             className="btn-close"
             data-bs-dismiss="alert"
             aria-label="Close"
-            data-testid="info-msg-entry-added"
           ></button>
         </div>
       )}
