@@ -6,6 +6,8 @@ export function getEnvironment() {
   switch (environment) {
     case "dev":
       return "http://localhost:9000";
+    case "mock":
+      return "http://localhost:3000/";
     default:
       return "https://z3.martioli.com/";
   }
