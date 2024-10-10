@@ -1,5 +1,5 @@
 import Card from "./Card";
-import { CardsListProps } from "./types";
+import { CardsListProps } from "../types";
 
 function CardsList({ cards }: CardsListProps) {
   return (

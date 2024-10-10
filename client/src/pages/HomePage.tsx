@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HeroSection from "../components/HeroSection";
-import CardsList from "../components/CardsList";
+import CardsList from "../components/cards/CardsList";
 import { fetchDataFromAPI } from "../api/apidata";
 import AddEntryForm from "../components/Form";
 import { CardInterface } from "../components/types";

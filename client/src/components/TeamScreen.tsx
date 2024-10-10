@@ -1,8 +1,8 @@
-import { BackButton } from "./buttons";
+import { BackButton } from "./cards/buttons";
 import { CardInterface } from "./types";
-import { DeveloperCard } from "./DeveloperCard";
-import { QACard } from "./QACard";
-import { ManagerCard } from "./ManagerCard";
+import { DeveloperCard } from "./cards/DeveloperCard";
+import { QACard } from "./cards/QACard";
+import { ManagerCard } from "./cards/ManagerCard";
 
 export const TeamScreen = ({
   developer,

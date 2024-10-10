@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { AddEntryFormProps } from "./types";
-import AddNewEntryBtn from "./buttons";
+import AddNewEntryBtn from "./cards/buttons";
 import { tokenContext } from "./context";
 
 function AddEntryForm({ onAddEntry }: AddEntryFormProps) {
